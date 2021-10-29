@@ -34,18 +34,22 @@
             <div class="collapse navbar-collapse pl-3 pr-3" id="navbarNavAltMarkup">
               <div class="navbar-nav">
                 <a class="nav-link active font-weight-bold" href="/">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link font-weight-bold" href="">Dashboard</a>
-                <a class="nav-link font-weight-bold" href="">Post</a>
+                <a class="nav-link font-weight-bold" href="{{ route('dashboard') }}">Dashboard</a>
+                <a class="nav-link font-weight-bold" href="#">Post</a>
               </div>
               <div class="navbar-nav align-self-end ml-auto">
-                  <a class="nav-link font-weight-bold" href="#">Alex</a>
-                  <form action="" method="post">
-                    @csrf
-                    <button class="submit_btn" type="submit">Logout</button>
-                  </form>
-                  
-                  <a class="nav-link font-weight-bold" href="{{ route('register') }}">Register</a>
-                  <a class="nav-link font-weight-bold" href="">Login</a>
+                  @auth
+                    <a class="nav-link font-weight-bold" href="#">Alex</a>
+                    <form action="{{ route('logout') }}" method="post">
+                      @csrf
+                      <button class="submit_btn" type="submit">Logout</button>
+                    </form>
+                  @endauth
+
+                  @guest
+                    <a class="nav-link font-weight-bold" href="{{ route('register') }}">Register</a>
+                    <a class="nav-link font-weight-bold" href="{{ route('login') }}">Login</a>
+                  @endguest
                   
               </div>
             </div>

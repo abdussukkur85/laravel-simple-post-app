@@ -44,7 +44,7 @@
                     <button class="submit_btn" type="submit">Logout</button>
                   </form>
                   
-                  <a class="nav-link font-weight-bold" href="">Register</a>
+                  <a class="nav-link font-weight-bold" href="{{ route('register') }}">Register</a>
                   <a class="nav-link font-weight-bold" href="">Login</a>
                   
               </div>

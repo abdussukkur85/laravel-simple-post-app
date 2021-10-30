@@ -35,11 +35,11 @@
               <div class="navbar-nav">
                 <a class="nav-link active font-weight-bold" href="/">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-link font-weight-bold" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link font-weight-bold" href="#">Post</a>
+                <a class="nav-link font-weight-bold" href="{{ route('posts') }}">Post</a>
               </div>
               <div class="navbar-nav align-self-end ml-auto">
                   @auth
-                    <a class="nav-link font-weight-bold" href="#">Alex</a>
+                    <a class="nav-link font-weight-bold" href="#">{{ auth()->user()->name }}</a>
                     <form action="{{ route('logout') }}" method="post">
                       @csrf
                       <button class="submit_btn" type="submit">Logout</button>

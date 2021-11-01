@@ -35,20 +35,20 @@
                             <p class="mb-0"><b>{{ $post->user->name }}</b> <span><i>{{ $post->created_at->diffForHumans() }}</i></span></p>
                             <p class="mb-0">{{ $post->body }}</p>
                             <div class="d-flex">
-                                {{-- @if (!$post->likedBy(auth()->user()))
-                                    <form action="{{ route('posts.store', $post) }}" method="post">
+                                @if (!$post->likedBy(auth()->user()))
+                                    <form action="{{ route('posts.likes', $post->id) }}" method="post">
                                         @csrf
                                         <button class="like_btn" type="submit">Like</button>
                                     </form>
                                 @else    
-                                    <form action="{{ route('posts.store', $post) }}" method="post">
+                                    <form action="{{ route('posts.likes', $post->id) }}" method="post">
                                         @csrf
                                         @method("DELETE")
                                         <button class="like_btn" type="submit">Unlike</button>
                                     </form>
-                                @endif --}}
+                                @endif
                                 
-                                {{-- <p>{{ $post->likes->count() }} {{ \Str::plural('Like', $post->likes->count()) }}</p> --}}
+                                <p>{{ $post->likes->count() }} {{ \Str::plural('Like', $post->likes->count()) }}</p>
                             </div>
                             
                         </div>

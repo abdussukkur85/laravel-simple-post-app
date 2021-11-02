@@ -16,23 +16,17 @@ a.user-profile{
 }
     </style>
 @endpush
-@section('title','Post Create')
+@section('title','Dashboard')
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 offset-md-2 bg-light mt-3 br-5 rounded p-4">
-                <form action="{{ route('posts') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="textarea">Create a new post</label>
-                        <textarea class="form-control @error('body') border-danger @enderror" name="body" id="textarea" rows="3" placeholder="Write Something!"></textarea>
-                        @error('body')
-                        <span class="text-danger">{{ $message }}</span>
-                      @enderror
-                    </div>
-                      <button type="submit" class="btn btn-primary">Post</button>
-                </form>
-
+            <div class="col-md-8 offset-md-2 mt-3">
+                <h2>{{ $user->name }}</h2>
+                <p><b>Posted: </b> {{ $posts->count() }} {{ \Str::plural('Post', $posts->count()) }}
+                and received <b>{{ $user->receivedLikes->count() }} {{ \Str::plural('Like', $user->receivedLikes->count()) }}</b>
+                </p>
+            </div>
+            <div class="col-md-8 offset-md-2 bg-light mt-3 br-5 rounded p-3">
                 @if($posts->count())
                     @foreach ($posts as $post)
                         <div class="post mt-3">
@@ -65,7 +59,7 @@ a.user-profile{
                         </div>
                     @endforeach
                 @else
-                    No Post Found!
+                    {{ $user->name }} does not have any post!
                 @endif
 
                 <div class="d-flex justify-content-end">

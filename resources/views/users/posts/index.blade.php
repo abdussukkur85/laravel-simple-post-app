@@ -32,27 +32,30 @@ a.user-profile{
                         <div class="post mt-3">
                             <p class="mb-0"><a class="user-profile" href="{{ route('users.posts', $post->user) }}"><b>{{ $post->user->name }}</b></a> <span><i>{{ $post->created_at->diffForHumans() }}</i></span></p>
                             <p class="mb-0">{{ $post->body }}</p>
-                            @if($post->ownedBy(auth()->user()))
-                                <form action="{{ route('posts.delete', $post->id) }}" method="post">
-                                    @csrf
-                                    @method("DELETE")
-                                    <button class="delete" type="submit">Delete</button>
-                                </form>
-                            @endif
-                            <div class="d-flex">
-                                @if (!$post->likedBy(auth()->user()))
-                                    <form action="{{ route('posts.likes', $post->id) }}" method="post">
-                                        @csrf
-                                        <button class="like_btn" type="submit">Like</button>
-                                    </form>
-                                @else    
-                                    <form action="{{ route('posts.likes', $post->id) }}" method="post">
+                            @auth
+                                @if($post->ownedBy(auth()->user()))
+                                    <form action="{{ route('posts.delete', $post->id) }}" method="post">
                                         @csrf
                                         @method("DELETE")
-                                        <button class="like_btn" type="submit">Unlike</button>
+                                        <button class="delete" type="submit">Delete</button>
                                     </form>
                                 @endif
-                                
+                            @endauth
+                            <div class="d-flex">
+                                @auth
+                                    @if (!$post->likedBy(auth()->user()))
+                                        <form action="{{ route('posts.likes', $post->id) }}" method="post">
+                                            @csrf
+                                            <button class="like_btn" type="submit">Like</button>
+                                        </form>
+                                    @else    
+                                        <form action="{{ route('posts.likes', $post->id) }}" method="post">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button class="like_btn" type="submit">Unlike</button>
+                                        </form>
+                                    @endif
+                                @endauth
                                 <p>{{ $post->likes->count() }} {{ \Str::plural('Like', $post->likes->count()) }}</p>
                             </div>
                             
